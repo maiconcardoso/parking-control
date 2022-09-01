@@ -20,5 +20,13 @@ public class ParkingSpotService {
         return parkingSpotRepostitory.save(parkingSpotModel);
     }
 
+    public boolean existsByLicensePlateCar(String licensePlateCar) {
+        return parkingSpotRepostitory.existsByLicensePlateCar(licensePlateCar);
+    }
+
+    public boolean existsByParkingSpotNumber(String parkingSpotNumber) {
+        return parkingSpotRepostitory.existsByParkingSpotNumber(parkingSpotNumber);
+    }
+
     
 }
