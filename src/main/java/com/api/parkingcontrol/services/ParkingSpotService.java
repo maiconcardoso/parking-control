@@ -46,8 +46,8 @@ public class ParkingSpotService {
  
     @Transactional
     public void deleteParkingSpot(UUID id) {
-        getOneParkingSpot(id);
-        parkingSpotRepostitory.deleteById(id);
+        ParkingSpotModel ParkingSpotForDeleted = parkingSpotRepostitory.findById(id).get();
+        parkingSpotRepostitory.delete(ParkingSpotForDeleted);
     }
 
     
