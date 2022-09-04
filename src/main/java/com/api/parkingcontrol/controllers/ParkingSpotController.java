@@ -104,6 +104,9 @@ public class ParkingSpotController {
             @RequestBody @Valid ParkingSpotDto parkingSpotDto) {
 
         Optional<ParkingSpotModel> parkingSpotById = parkingSpotService.getOneParkingSpot(id);
+        if (!parkingSpotById.isPresent()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Parking Spot Not Found");
+        }
 
         var parkingSpotModel = new ParkingSpotModel();
         BeanUtils.copyProperties(parkingSpotDto, parkingSpotModel);
