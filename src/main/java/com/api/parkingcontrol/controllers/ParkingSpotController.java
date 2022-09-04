@@ -35,7 +35,6 @@ public class ParkingSpotController {
 
     private final ParkingSpotService parkingSpotService;
 
-    
     @PostMapping
     public ResponseEntity<Object> saveParkingSpot(@RequestBody @Valid ParkingSpotDto parkingSpotDto) {
         if (parkingSpotService.existsByLicensePlateCar(parkingSpotDto.getLicensePlateCar())) {
@@ -47,7 +46,8 @@ public class ParkingSpotController {
         }
 
         if (parkingSpotService.existsByApartmentAndBlock(parkingSpotDto.getApartment(), parkingSpotDto.getBlock())) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("CONFLICT: Parking Spot already registered for this apartment/block");
+            return ResponseEntity.status(HttpStatus.CONFLICT)
+                    .body("CONFLICT: Parking Spot already registered for this apartment/block");
         }
 
         var parkingSpotModel = new ParkingSpotModel();
@@ -60,7 +60,6 @@ public class ParkingSpotController {
     public ResponseEntity<List<ParkingSpotModel>> findAll() {
         return ResponseEntity.status(HttpStatus.OK).body(parkingSpotService.findAll());
     }
-
 
     @GetMapping("/{id}")
     public ResponseEntity<Object> getOneParkingSpot(@PathVariable(value = "id") UUID id) {
@@ -81,21 +80,36 @@ public class ParkingSpotController {
         return ResponseEntity.status(HttpStatus.OK).body("Parking Spot Deleted successfully");
     }
 
+    // @PutMapping("/{id}")
+    // public ResponseEntity<Object> updateParkingSpot(@PathVariable(value = "id")
+    // UUID id, @RequestBody @Valid ParkingSpotDto parkingSpotDto) {
+    // ParkingSpotModel parkingSpotModelForUpdated =
+    // parkingSpotService.getOneParkingSpot(id).get();
+
+    // parkingSpotModelForUpdated.setApartment(parkingSpotDto.getApartment());
+    // parkingSpotModelForUpdated.setBlock(parkingSpotDto.getBlock());
+    // parkingSpotModelForUpdated.setBrandCar(parkingSpotDto.getBrandCar());
+    // parkingSpotModelForUpdated.setColorCar(parkingSpotDto.getColorCar());
+    // parkingSpotModelForUpdated.setLicensePlateCar(parkingSpotDto.getLicensePlateCar());
+    // parkingSpotModelForUpdated.setModelCar(parkingSpotDto.getModelCar());
+    // parkingSpotModelForUpdated.setParkingSpotNumber(parkingSpotDto.getParkingSpotNumber());
+    // parkingSpotModelForUpdated.setResponsibleName(parkingSpotDto.getResponsibleName());
+
+    // return
+    // ResponseEntity.status(HttpStatus.OK).body(parkingSpotService.save(parkingSpotModelForUpdated));
+    // }
+
     @PutMapping("/{id}")
-    public ResponseEntity<Object> updateParkingSpot(@PathVariable(value = "id") UUID id, @RequestBody @Valid ParkingSpotDto parkingSpotDto) {
-        ParkingSpotModel parkingSpotModelForUpdated = parkingSpotService.getOneParkingSpot(id).get();
+    public ResponseEntity<Object> updateParkingSpot(@PathVariable(value = "id") UUID id,
+            @RequestBody @Valid ParkingSpotDto parkingSpotDto) {
 
-        parkingSpotModelForUpdated.setApartment(parkingSpotDto.getApartment());
-        parkingSpotModelForUpdated.setBlock(parkingSpotDto.getBlock());
-        parkingSpotModelForUpdated.setBrandCar(parkingSpotDto.getBrandCar());
-        parkingSpotModelForUpdated.setColorCar(parkingSpotDto.getColorCar());
-        parkingSpotModelForUpdated.setLicensePlateCar(parkingSpotDto.getLicensePlateCar());
-        parkingSpotModelForUpdated.setModelCar(parkingSpotDto.getModelCar());
-        parkingSpotModelForUpdated.setParkingSpotNumber(parkingSpotDto.getParkingSpotNumber());
-        parkingSpotModelForUpdated.setResponsibleName(parkingSpotDto.getResponsibleName());
+        Optional<ParkingSpotModel> parkingSpotById = parkingSpotService.getOneParkingSpot(id);
 
-        return ResponseEntity.status(HttpStatus.OK).body(parkingSpotService.save(parkingSpotModelForUpdated));
+        var parkingSpotModel = new ParkingSpotModel();
+        BeanUtils.copyProperties(parkingSpotDto, parkingSpotModel);
+        parkingSpotModel.setId(parkingSpotById.get().getId());
+        parkingSpotModel.setRegistrationDate(parkingSpotById.get().getRegistrationDate());
+        return ResponseEntity.status(HttpStatus.OK).body(parkingSpotService.save(parkingSpotModel));
     }
 
-    
 }
