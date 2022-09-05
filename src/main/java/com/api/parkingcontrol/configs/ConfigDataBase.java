@@ -1,6 +1,7 @@
 package com.api.parkingcontrol.configs;
 
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Bean;
 
 import com.api.parkingcontrol.models.ParkingSpotModel;
 import com.api.parkingcontrol.repositories.ParkingSpotRepostitory;
@@ -12,6 +13,7 @@ public class ConfigDataBase{
 
     private final ParkingSpotRepostitory parkingSpotRepostitory;
 
+    @Bean
     private CommandLineRunner execute() {
         return args -> {
             ParkingSpotModel parkingSpotModel = new ParkingSpotModel();
