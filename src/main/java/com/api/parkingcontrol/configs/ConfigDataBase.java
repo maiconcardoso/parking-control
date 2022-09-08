@@ -20,38 +20,38 @@ public class ConfigDataBase{
 
     private final ParkingSpotRepostitory parkingSpotRepostitory;
 
-    @Bean
-    public CommandLineRunner execute() {
-        return args -> {
-            ParkingSpotModel parkingSpotModel = new ParkingSpotModel();
-            parkingSpotModel.setParkingSpotNumber("205");
-            parkingSpotModel.setApartment("202");
-            parkingSpotModel.setBlock("9");
-            parkingSpotModel.setBrandCar("HONDA");
-            parkingSpotModel.setColorCar("WHITE");
-            parkingSpotModel.setModelCar("HRV");
-            parkingSpotModel.setLicensePlateCar("RRS856");
-            parkingSpotModel.setResponsibleName("Carlos Daniel");
-            parkingSpotModel.setRegistrationDate(LocalDateTime.now(ZoneId.of("UTC")));
+    // @Bean
+    // public CommandLineRunner execute() {
+    //     return args -> {
+    //         ParkingSpotModel parkingSpotModel = new ParkingSpotModel();
+    //         parkingSpotModel.setParkingSpotNumber("205");
+    //         parkingSpotModel.setApartment("202");
+    //         parkingSpotModel.setBlock("9");
+    //         parkingSpotModel.setBrandCar("HONDA");
+    //         parkingSpotModel.setColorCar("WHITE");
+    //         parkingSpotModel.setModelCar("HRV");
+    //         parkingSpotModel.setLicensePlateCar("RRS856");
+    //         parkingSpotModel.setResponsibleName("Carlos Daniel");
+    //         parkingSpotModel.setRegistrationDate(LocalDateTime.now(ZoneId.of("UTC")));
 
-            ParkingSpotModel otherParkingSpotModel = new ParkingSpotModel();
-            otherParkingSpotModel.setParkingSpotNumber("232H");
-            otherParkingSpotModel.setApartment("45");
-            otherParkingSpotModel.setBlock("A");
-            otherParkingSpotModel.setBrandCar("Chevrolet");
-            otherParkingSpotModel.setColorCar("gray");
-            otherParkingSpotModel.setModelCar("TRAKER");
-            otherParkingSpotModel.setLicensePlateCar("RFG5454");
-            otherParkingSpotModel.setResponsibleName("Maicon Cardoso");
-            otherParkingSpotModel.setRegistrationDate(LocalDateTime.now(ZoneId.of("UTC")));
+    //         ParkingSpotModel otherParkingSpotModel = new ParkingSpotModel();
+    //         otherParkingSpotModel.setParkingSpotNumber("232H");
+    //         otherParkingSpotModel.setApartment("45");
+    //         otherParkingSpotModel.setBlock("A");
+    //         otherParkingSpotModel.setBrandCar("Chevrolet");
+    //         otherParkingSpotModel.setColorCar("gray");
+    //         otherParkingSpotModel.setModelCar("TRAKER");
+    //         otherParkingSpotModel.setLicensePlateCar("RFG5454");
+    //         otherParkingSpotModel.setResponsibleName("Maicon Cardoso");
+    //         otherParkingSpotModel.setRegistrationDate(LocalDateTime.now(ZoneId.of("UTC")));
 
-            List<ParkingSpotModel> parkingSpotModelList = new ArrayList<>();
-            parkingSpotModelList.add(parkingSpotModel);
-            parkingSpotModelList.add(otherParkingSpotModel);
+    //         List<ParkingSpotModel> parkingSpotModelList = new ArrayList<>();
+    //         parkingSpotModelList.add(parkingSpotModel);
+    //         parkingSpotModelList.add(otherParkingSpotModel);
 
-            parkingSpotRepostitory.saveAll(parkingSpotModelList);
-        };
-    }
+    //         parkingSpotRepostitory.saveAll(parkingSpotModelList);
+    //     };
+    // }
 
     
     
