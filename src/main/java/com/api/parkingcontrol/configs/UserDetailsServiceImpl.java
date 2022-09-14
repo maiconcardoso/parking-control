@@ -1,5 +1,7 @@
 package com.api.parkingcontrol.configs;
 
+import javax.transaction.Transactional;
+
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class UserDetailsServiceImpl implements UserDetailsService{
 
     private final UserRepository userRepository;
